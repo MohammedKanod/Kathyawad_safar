@@ -1,0 +1,6 @@
+{
+  "name": "Kathiyawad Safar 1447",
+  "description": "A premium travel companion for the Kathiyawad Safar 1447 journey, featuring live tracking, itinerary management, and real-time announcements.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["firebase", "google_maps"]
+}

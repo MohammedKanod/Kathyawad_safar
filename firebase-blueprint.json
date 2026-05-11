@@ -1,0 +1,147 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Traveler profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "traveler"] },
+        "isAdmin": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Real-time updates for travelers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "type": { "type": "string", "enum": ["info", "warning", "emergency", "delay"] },
+        "authorId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "type", "authorId", "createdAt"]
+    },
+    "ItineraryDay": {
+      "title": "Itinerary Day",
+      "description": "Schedule for a single day of the safar",
+      "type": "object",
+      "properties": {
+        "dayNumber": { "type": "integer" },
+        "date": { "type": "string", "format": "date" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "stops": {
+          "type": "array",
+          "items": { "$ref": "#/entities/Stop" }
+        }
+      },
+      "required": ["dayNumber", "date", "title"]
+    },
+    "Stop": {
+      "title": "Stop",
+      "description": "A specific location or event in the itinerary",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["ziyarat", "jaman", "namaz", "stay", "travel"] },
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" },
+            "address": { "type": "string" }
+          }
+        },
+        "arrivalTime": { "type": "string", "format": "date-time" },
+        "departureTime": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["pending", "active", "completed"] }
+      },
+      "required": ["name", "type"]
+    },
+    "LiveTracking": {
+      "title": "Live Tracking",
+      "description": "Real-time GPS data for the vehicle",
+      "type": "object",
+      "properties": {
+        "vehicleId": { "type": "string" },
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          }
+        },
+        "speed": { "type": "number" },
+        "heading": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "nextStopId": { "type": "string" },
+        "eta": { "type": "string", "format": "date-time" },
+        "progress": { "type": "number" }
+      },
+      "required": ["location", "updatedAt"]
+    },
+    "Photo": {
+      "title": "Photo",
+      "description": "Shared travel photo",
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "caption": { "type": "string" },
+        "uploaderId": { "type": "string" },
+        "dayNumber": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "ChecklistItem": {
+      "title": "Checklist Item",
+      "description": "Individual item in the travel checklist",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string" },
+        "category": { "type": "string" },
+        "completed": { "type": "boolean" },
+        "userId": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": "User",
+      "description": "System users and travelers"
+    },
+    "announcements": {
+      "schema": "Announcement",
+      "description": "Global travel announcements"
+    },
+    "itinerary": {
+      "schema": "ItineraryDay",
+      "description": "Full travel schedule day-by-day"
+    },
+    "tracking": {
+      "schema": "LiveTracking",
+      "description": "Real-time location data"
+    },
+    "photos": {
+      "schema": "Photo",
+      "description": "Journey photo gallery"
+    },
+    "checklist": {
+      "schema": "ChecklistItem",
+      "description": "User-specific travel checklists"
+    },
+    "settings": {
+      "schema": "object",
+      "description": "Global application settings and journey state"
+    }
+  }
+}
