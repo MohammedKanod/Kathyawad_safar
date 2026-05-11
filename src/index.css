@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-islamic: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-gold: #D4AF37;
+  --color-teal: #14B8A6;
+  --color-dark: #050505;
+  --color-surface: #0a0a0a;
+  --color-card: #0f0f0f;
+}
+
+:root {
+  background-color: var(--color-dark);
+  color: #e5e7eb;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.islamic-pattern {
+  background-image: radial-gradient(var(--color-teal) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+.glass-card {
+  @apply bg-card/80 backdrop-blur-md border border-white/5 rounded-2xl transition-all duration-300;
+}
+
+.glass-card-gold {
+  @apply bg-gold/5 border border-gold/20 rounded-2xl transition-all duration-300;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-linear-to-r from-gold to-teal;
+}
+
+.nav-border {
+  @apply border-b border-gold/20 bg-surface/80 backdrop-blur-md;
+}
+
+.btn-primary {
+  @apply bg-gold text-dark px-6 py-3 rounded-xl font-bold transition-all hover:bg-gold/90 shadow-lg shadow-gold/10 flex items-center justify-center;
+}
+
+.btn-secondary {
+  @apply bg-white/5 text-white border border-white/10 px-6 py-3 rounded-xl font-bold transition-all hover:bg-white/10;
+}
